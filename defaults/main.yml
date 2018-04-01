@@ -1,2 +1,53 @@
 ---
 # defaults file for ansible-test-popdsldap
+
+popdsldap_init: true
+popdsldap_basedn_dbdirectory: "/var/lib/ldap/popds"
+popdsldap_removal_filepath:
+  - '/etc/ldap/slapd.d/cn=config/olcDatabase={1}mdb.ldif'
+  - '/etc/ldap/slapd.d/cn=config/olcDatabase={1}mdb'
+  - '/var/lib/ldap/data.mdb'
+  - '/var/lib/ldap/lock.mdb'
+  - "{{ popdsldap_basedn_dbdirectory }}"
+  
+popdsldap_add_dirinfo:
+  - { path: "{{ popdsldap_basedn_dbdirectory }}", owner: 'openldap', group: 'openldap', mode: '0750' }
+
+popdsldap_additional_schema:
+  - ppolicy
+
+popdsldap_ldapadd_cn_config_files:
+  - popdsldap_01_create_backenddb.ldif
+
+popdsldap_ldapadd_backenddb_files:
+  - popdsldap_02_add_subentries.ldif
+  - popdsldap_03_popup_people_data.ldif
+
+popdsldap_copy_ldif_files:
+  - popdsldap_01_create_backenddb.ldif
+  - popdsldap_02_add_subentries.ldif
+  - popdsldap_03_popup_people_data.ldif
+  - popdsldap_04_popup_group_data.ldif
+
+popdsldap_copy_ldif_perms:
+  owner: root
+  group: root
+  mode: '0600'
+
+popdsldap_metadb_index: 1
+popdsldap_basedn: "dc=example,dc=com"
+popdsldap_basedn_top_object: "dc"
+popdsldap_basedn_top_objecttype: "dcObject"
+popdsldap_basedn_top_entry: "example"
+popdsldap_cn_admin_dnprefix: "cn=admin"
+popdsldap_cn_admin_password: "transpasswd"
+
+popdsldap_sub_entry:
+  - { suffix_object: "ou", suffix_name: "people", suffix_objecttype: "organizationalUnit" }
+  - { suffix_object: "ou", suffix_name: "group", suffix_objecttype: "organizationalUnit" }
+  
+
+## To populate database, load files/popds_{{ subentry_name }}_data.yml with specified objectClasses.
+popdsldap_populate_data:
+  people: "{{ lookup('file', 'files/popds_people_data.yml')|from_yaml }}"
+  group:  "{{ lookup('file', 'files/popds_group_data.yml')|from_yaml }}"

@@ -1,0 +1,14 @@
+
+dn: {{ popdsldap_basedn }}
+objectClass: {{ popdsldap_basedn_top_objecttype }}
+objectclass: organization
+{{ popdsldap_basedn_top_object }}: {{ popdsldap_basedn_top_entry }}
+o: {{ popdsldap_basedn_top_entry }}
+
+## need modification: TBD
+{% for data in popdsldap_sub_entry %}
+dn: {{ data['suffix_object'] }}={{ data['suffix_name'] }},{{ popdsldap_basedn }}
+objectclass: {{ data['suffix_objecttype'] }}
+{{ data['suffix_object'] }}: {{ data['suffix_name'] }}
+
+{% endfor %}

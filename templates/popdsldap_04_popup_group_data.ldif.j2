@@ -1,0 +1,10 @@
+
+## populate sample data from an external YAML file
+{% set group = popdsldap_populate_data['group'] %}
+{% for g in group %}
+
+dn: cn={{ g['cn'] }},ou=people,{{ popdsldap_basedn }}
+objectClass: posixGroup
+cn: {{ g['cn'] }}
+gidNumber: {{ g['gidNumber'] }}
+{% endfor %}

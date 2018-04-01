@@ -1,0 +1,20 @@
+
+- cn: user001
+  uid: user001
+  sn: user001
+  uidNumber: 1000
+  gidNumber: 1000
+  homeDirectory: /home/user001/
+  loginShell: /bin/bash
+  gecos: user001
+  userPassword: "{SSHA}idgDgUqc0tC3Gq//z2Lg7UT3cua4Li+U"
+
+- cn: user002
+  uid: user002
+  sn: user002
+  uidNumber: 1002
+  gidNumber: 1000
+  homeDirectory: /home/user002/
+  loginShell: /bin/bash
+  gecos: user002
+  userPassword: "{SSHA}idgDgUqc0tC3Gq//z2Lg7UT3cua4Li+U"

@@ -1,0 +1,19 @@
+
+## populate sample data from an external YAML file
+{% set person = popdsldap_populate_data['people'] %}
+{% for p in person %}
+
+dn: uid={{ p['uid'] }},ou=people,{{ popdsldap_basedn }}
+objectClass: posixAccount
+objectClass: person
+objectClass: shadowAccount
+cn: {{ p['cn'] }}
+sn: {{ p['sn'] }}
+uid: {{ p['uid'] }}
+uidNumber: {{ p['uidNumber'] }}
+gidNumber: {{ p['gidNumber'] }}
+homeDirectory: {{ p['homeDirectory'] }}
+userPassword: {{ p['userPassword'] }}
+loginShell: {{ p['loginShell'] }}
+gecos: {{ p['gecos'] }}
+{% endfor %}

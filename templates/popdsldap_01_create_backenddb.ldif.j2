@@ -1,0 +1,14 @@
+
+## for olcDatabase={{ "{" }}1{{ "}" }}mdb,cn=config 
+dn: olcDatabase=mdb,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcMdbConfig
+olcDatabase: mdb
+OlcDbMaxSize: 1073741824
+olcSuffix: {{ popdsldap_basedn }}
+olcRootDN: {{ popdsldap_cn_admin_dnprefix }},{{ popdsldap_basedn }}
+olcRootPW: {{ popdsldap_cn_admin_password }}
+olcDbDirectory: {{ popdsldap_basedn_dbdirectory }}
+olcDbIndex: objectClass eq
+olcAccess: to * by * read
+
