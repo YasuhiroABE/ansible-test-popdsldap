@@ -103,6 +103,9 @@ Following vars entries need to be configured for your environment.
         mfts_additional_packages:
           - slapd
           - ldap-utils
+        popdsldap_basedn: "dc=example,dc=org"
+        popdsldap_basedn_top_entry: "example"
+        popdsldap_cn_admin_password: "transpasswd"
       roles:
         - YasuhiroABE.myfavorite-setting
         - ansible-test-popdsldap
