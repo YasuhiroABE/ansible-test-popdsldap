@@ -57,7 +57,8 @@ Role Variables
     popdsldap_ldapadd_backenddb_files:
       - popdsldap_02_add_subentries.ldif
       - popdsldap_03_popup_people_data.ldif
-
+      - popdsldap_04_popup_group_data.ldif
+    
     popdsldap_copy_ldif_files:
       - popdsldap_01_create_backenddb.ldif
       - popdsldap_02_add_subentries.ldif
